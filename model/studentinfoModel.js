@@ -6,7 +6,6 @@ const StudentSchema= new Schema({
         required:true
     },email:{
         type:String,
-        unique:true,
         required:true
     },Attandence:{
         type:String,
