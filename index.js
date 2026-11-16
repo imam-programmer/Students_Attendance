@@ -2,31 +2,26 @@ require("dotenv").config()
 const express=require("express");
 const StudentAttendence=require("./controllers/studentPresentController")
 const mongodbConnection=require("./config/mongodbConfiguration")
+const authorize=require("./middleware/authorizeMiddleware")
+const studentUpdate=require("./controllers/studentUpdateController")
+const deleteData=require("./controllers/DeleteController")
 const app=express()
 app.use(express.json())
 const port=process.env.PORT || 5000
-const Attendance=require("./model/studentinfoModel")
+
 
 mongodbConnection()
 
 app.post("/students",StudentAttendence)
-app.post("/updata/:id",async (req,res)=>{
-const {id}=req.params
-const updateData= await Attendance.findByIdAndUpdate({_id:id},req.body,{new:true})
-res.status(200).json({
-    success:true,
-    message:updateData
-})
-})
 
-app.delete("/delete/:id",async (req,res)=>{
-const {id}=req.params
- await Attendance.findByIdAndDelete(id)
-res.status(200).json({
-    success:true,
-    message:"Data deleted"
-})
-})
+
+app.post("/updata/:id",authorize,studentUpdate)
+
+
+
+app.delete("/delete/:id",authorize,deleteData)
+
+
 app.listen(port,()=>{
     console.log("server is running")
 })
