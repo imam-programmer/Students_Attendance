@@ -12,13 +12,14 @@ const port=process.env.PORT || 5000
 
 mongodbConnection()
 
+// this is for student attendence========================================
 app.post("/students",StudentAttendence)
 
+// this is for update student information=======================================
+app.post("/update/:id",authorize,studentUpdate)
 
-app.post("/updata/:id",authorize,studentUpdate)
 
-
-
+// =this is for student delete=======================================
 app.delete("/delete/:id",authorize,deleteData)
 
 
