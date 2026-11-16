@@ -8,7 +8,7 @@ const StudentSchema= new Schema({
         type:String,
         unique:true,
         require:true
-    },present:{
+    },Attandence:{
         type:String,
         enum:["present","absent"],
         default:"absent"

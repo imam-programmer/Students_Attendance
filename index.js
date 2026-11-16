@@ -1,10 +1,14 @@
 require("dotenv").config()
 const express=require("express");
 const StudentAttendence=require("./controllers/studentPresentController")
+const mongodbConnection=require("./config/mongodbConfiguration")
 const app=express()
 app.use(express.json())
-const port=process.env.PORT
+const port=process.env.PORT || 5000
 const Attendance=require("./model/studentinfoModel")
+
+mongodbConnection()
+
 app.post("/students",StudentAttendence)
 app.post("/updata/:id",async (req,res)=>{
 const {id}=req.params

@@ -1,5 +1,5 @@
 const StudentAttendence=(req,res)=>{
-    const {name,email,present,homework}=res.body
+    const {name,email,Attandence,homework}=req.body
 
 
 }
